@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Learning – Part 1: Memory blocks</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<p><a href="/">← Back to Lab26</a></p>
+
+<h2>Part 1: What is a memory block?</h2>
+
+<p>A memory block, or memory address, is the place in memory where a piece of your program, such as a variable, lives.</p>
+<p>Everything in a program takes up some memory, so we can use pointers in C to see where each variable is stored. The program below prints the size and the address of six variables:</p>
+
+<pre><code id="code">#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 12;
+    char b = 'A';
+    float c = 123;
+    char d;
+    char e[] = "asd";
+    char f;
+
+    printf("Sizes (bytes)\n");
+    printf("%zu\n", sizeof(a));
+    printf("%zu\n", sizeof(b));
+    printf("%zu\n", sizeof(c));
+    printf("%zu\n", sizeof(d));
+    printf("%zu\n", sizeof(e));
+    printf("%zu\n", sizeof(f));
+
+    printf("Memory addresses\n");
+    printf("%p\n", (void *)&amp;a);
+    printf("%p\n", (void *)&amp;b);
+    printf("%p\n", (void *)&amp;c);
+    printf("%p\n", (void *)&amp;d);
+    printf("%p\n", (void *)e);
+    printf("%p\n", (void *)&amp;f);
+
+    return 0;
+}</code></pre>
+
+<h2>How it works</h2>
+
+<p>The <code>&amp;</code> operator gives the address of a variable, and <code>%p</code> prints an address. Casting to <code>(void *)</code> is the correct way to pass an address to <code>%p</code>. The array <code>e</code> already acts as an address, so it needs no <code>&amp;</code>.</p>
+<p>We check <code>sizeof</code> first because different data types have different sizes. For example, an <code>int</code> usually has 4 bytes, while a <code>char</code> has exactly 1 byte.</p>
+<p>For strings, <code>sizeof</code> counts the whole array. With <code>char e[] = "asd"</code>, the size is 4: three characters plus the null terminator, so n + 1. If you write a fixed buffer such as <code>char e[10] = "asd"</code>, <code>sizeof</code> shows 10, the size of the buffer, not the length of the text.</p>
+<p>Every string ends with a null terminator, a byte with the value 0, written <code>'\0'</code>.</p>
+<p>The addresses you see will look like <code>0x7ffc...</code> on 64-bit Linux, and they change each time you run the program.</p>
+<a href="https://github.com/The-Seal-Projects/about-computers/blob/main/memory.c">GitHub</a>
+<a href="https://www.tiktok.com/@zllai26.sealproject">TikTok</a>
+
+<hr>
+
+</body>
+</html>
